@@ -1,0 +1,26 @@
+:multiply
+sve $a
+sve $b
+push 0
+sve $o
+push 0
+lde $a
+cmp
+jmp 17
+pop 1
+lde $b
+lde $o
+add
+sve $o
+push 1
+add
+jmp 6
+pop 2
+lde $o
+ret
+:start
+push 3
+push 5
+call @multiply
+dsp 0
+ret
