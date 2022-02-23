@@ -1,0 +1,110 @@
+int map[][] = new int[50][50];
+void setup() {
+  size(500,500);
+  reset();
+  createMap();
+  debug();
+}
+void draw() {
+  updateMap();
+  debug();
+  while(true){
+  }
+  //delay(1000);
+}
+void updateMap() {
+  for (int a = 0; a < 50; a++) {
+    for (int b = 0; b < 50; b++) {
+      int liveCells = 0;
+      if ((a - 1 >= 0) && (b - 1 >= 0)) {
+        if (map[b - 1][a - 1] == 1) {
+          liveCells++;
+        }
+      }
+      if (a - 1 >= 0) {
+        if (map[b][a - 1] == 1) {
+          liveCells++;
+        }
+      }
+      if ((b + 1 < 10) && (a - 1 >= 0)) {
+        if (map[b + 1][a - 1] == 1) {
+          liveCells++;
+        }
+      }
+      if (b + 1 < 10) {
+        if (map[b + 1][a] == 1) {
+          liveCells++;
+        }
+      }
+      if ((b + 1 < 10) && (a + 1 < 10)) {
+        if (map[b + 1][a + 1] == 1) {
+          liveCells++;
+        }
+      }
+      if (a + 1 < 10) {
+        if (map[b][a + 1] == 1) {
+          liveCells++;
+        }
+      }
+      if ((a + 1 < 10) && (b - 1 >= 0)) {
+        if (map[b - 1][a + 1] == 1) {
+          liveCells++;
+        }
+      }
+      if (b - 1 >= 0) {
+        if (map[b - 1][a] == 1) {
+          liveCells++;
+        }
+      }
+      //println(liveCells);
+      if (liveCells == 3) {
+        map[b][a] = 3;
+      }
+      if (liveCells < 3 || liveCells > 4) {
+        map[b][a] = 2;
+      } else if (map[b][a] == 1) {
+        map[b][a] = 3;
+      }
+    }
+  }
+  debug();
+  for (int a = 0; a < 50; a++) {
+    for (int b = 0; b < 50; b++) {
+      if (map[b][a] == 3) {
+        fill(#236AB4);
+        map[b][a] = 1;
+        rect(b*10,a*10,10,10);
+      } else if (map[b][a] == 2) {
+        map[b][a] = 0;
+      } else if (map[b][a] == 3) {
+        fill(#093767);
+        rect(b*10,a*10,10,10);
+      }
+    }
+  }
+}
+void createMap() {
+  for (int a = 0; a < 50; a++) {
+    for (int b = 0; b < 50; b++) {
+      if (int(random(99)) < 16) {
+        map[b][a] = 1;
+      }
+    }
+  }
+}
+void reset() {
+  for (int a = 0; a < 50; a++) {
+    for (int b = 0; b < 50; b++) {
+      fill(#093767);
+      rect(b*10,a*10,10,10);
+    }
+  }
+}
+void debug() {
+  for (int a = 0; a < 50; a++) {
+    for (int b = 0; b < 50; b++) {
+      print(map[b][a]);
+    }
+    print("\n");
+  }
+}

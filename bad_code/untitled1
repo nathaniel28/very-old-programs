@@ -1,0 +1,149 @@
+var enemies = [];
+var projectiles = [];
+var length = [];
+var num = 5;
+var px = 250;
+var py = 250;
+
+function setup() {
+	createCanvas(500, 500);
+	background(255);
+	for (let i = 0; i < 2; i++) {
+		length[i] = 0;
+	}
+	for (let i = 0; i < num; i++) {
+		enemies[i] = new enemy(int(random(100,400)),int(random(100,400)),2,int(random(10,15)));
+		length[1]++;
+	}
+}
+
+function draw() {
+	background(255);
+	for (let i = 0; i < length[0]; i++) {
+		if (projectiles[i] == null) {
+			print("error on projectiles: projectile undefined");
+			print("clearing projectiles");
+			for (let j = 0; i < length[0]; i++) {
+				projectiles[j] = 0;
+				length[0]--;
+			}
+		} else {
+			projectiles[i].update();
+		}
+	}
+	for (let i = 0; i < num; i++) {
+		enemies[i].update();
+		enemies[i].attack();
+		//enemies[i].test();
+	}
+	if (keyIsPressed) {
+		let n = 0;
+		if (keyIsDown(87)) {
+			n++;
+		}
+		if (keyIsDown(83)) {
+			n++;
+		}
+		if (keyIsDown(68)) {
+			n++;
+		}
+		if (keyIsDown(65)) {
+			n++;
+		}
+		if (keyIsDown(87)) {
+			if (keyIsDown(68)) {
+				
+			} else if (keyIsDown(65)) {
+				
+			}
+		} else if (keyIsDown(83)) {
+			if (keyIsDown(68)) {
+				
+			} else if (keyIsDown(65)) {
+				
+			}
+		}
+		
+		
+		if (keyIsDown(65)) {
+			print("a");
+		}
+		if (keyIsDown(83)) {
+			print("s");
+		}
+		if (keyIsDown(68)) {
+			print("d");
+		}
+		if (keyIsDown(87)) {
+			print("w");
+		}
+	}
+}
+
+function projectile(x,y,angle,speed,size,type) {
+	this.x = x;
+	this.y = y;
+	this.angle = angle;
+	this.speed = speed;
+	this.size = size;
+	this.type = type;
+	this.id = length[0];
+	this.update = function() {
+		ellipse(this.x,this.y,this.size);
+		this.x += this.speed*cos(this.angle);
+		this.y += this.speed*sin(this.angle);
+		if (this.x > width || this.x < 0 || this.y > height || this.y < 0) {
+			projectiles[this.id] = 0;
+			projectiles.sort();
+			projectiles.reverse();
+			projectiles.pop();
+			//print(projectiles);
+			length[0]--;
+		}
+	}
+}
+
+class enemy {
+	constructor(x,y,t,h) {
+		this.x = x;
+		this.y = y;
+		this.type = t;
+		this.health = h;
+		this.size = 15 + t*5;
+		this.cooldown = 50;
+		this.atkType = 0;
+		this.id = length[1];
+	}
+	
+	update() {
+		ellipse(this.x,this.y,this.size);
+		if (this.health <= 0) {
+			enemies[this.id] = 0;
+			enemies.sort();
+			enemies.reverse();
+			enemies.pop();
+			length[1]--;
+		}
+	}
+	
+	attack() {
+		if (this.cooldown <= 0) {
+			this.atkType = random(0,3);
+			if (this.atkType < 1) {
+				projectiles[length[0]] = new projectile(this.x,this.y,random(0,TWO_PI),3,12,1);
+				length[0]++;
+				this.cooldown = 150;
+			} else if (this.atkType < 2) {
+				projectiles[length[0]] = new projectile(this.x,this.y,random(0,TWO_PI),9,4,1);
+				length[0]++;
+				this.cooldown = 150;
+			}
+		} else {
+			this.cooldown--;
+		}
+	}
+	
+	test() {
+		print("id:"+this.id+" {x:"+this.x+" y:"+this.y+" size:"+this.size+" cooldown:"+this.cooldown+"}");
+	}
+}

@@ -1,0 +1,82 @@
+void setup() {
+  size(1000,1000);
+  int[][] c1 = new int[20][20];
+  for (int i = 0; i < 10; i++) {
+    for (int a = 0; a < 10; a++) {
+      c1[a][i] = int(random(1,16));
+      print(c1[a][i]+" ");
+    }
+  }
+  Decode(c1,100,10);
+}
+void Decode(int array[][],int m, int p) {
+  for (int a = 0; a < p; a++) {
+    for (int i = 0; i < p; i++) {
+      if (array[a][i] == 1) {
+        line(a*m,i*m,a*m,i*m+m);
+      }
+      if (array[a][i] == 2) {
+        line(a*m,i*m,a*m+m,i*m);
+      }
+      if (array[a][i] == 3) {
+        line(a*m+m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 4) {
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 5) {
+        line(a*m,i*m,a*m,i*m+m);
+        line(m,i*m+m,m,i*m+m);
+      }
+      if (array[a][i] == 6) {
+        line(a*m,i*m,a*m+m,i*m);
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 7) {
+        line(a*m,i*m,a*m,i*m+m);
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 8) {
+        line(a*m,i*m,a*m+m,i*m);
+        line(a*m+m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 9) {
+        line(a*m+m,i*m+m,a*m+m,i*m+m);
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 10) {
+        line(a*m,i*m,a*m,i*m+m);
+        line(a*m,i*m,a*m+m,i*m);
+      }
+      if (array[a][i] == 11) {
+        line(a*m,i*m,a*m,i*m+m);
+        line(a*m,i*m,a*m+m,i*m);
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 12) {
+        line(a*m,i*m,a*m,i*m+m);
+        line(a*m,i*m,a*m+m,i*m);
+        line(a*m+m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 13) {
+        line(a*m,i*m,a*m+m,i*m);
+        line(a*m+m,i*m+m,a*m+m,i*m+m);
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 14) {
+        line(a*m,i*m,a*m,i*m+m);
+        line(a*m+m,i*m+m,a*m+m,i*m+m);
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 15) {
+        line(a*m,i*m,a*m,i*m+m);
+        line(a*m,i*m,a*m+m,i*m);
+        line(a*m+m,i*m+m,a*m+m,i*m+m);
+        line(a*m,i*m+m,a*m+m,i*m+m);
+      }
+      if (array[a][i] == 16) {
+        //Does nothing
+      }
+    }
+  }
+}

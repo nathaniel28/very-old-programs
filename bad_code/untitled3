@@ -1,0 +1,46 @@
+int x = 256/2;
+int y = 256/2;
+float v = 0;
+int x2 = 256/2+100;
+int y2 = 256/2-100;
+float v2 = 0;
+float g = 9.807; //earth gravity 9.807
+void setup() {
+  size(256,256);
+  background(#FFFFFF);
+  fill(#346A8E);
+  ellipse(x,y,50,50);
+}
+void draw() {
+  background(#FFFFFF);
+  if((dist(mouseX,mouseY,x,y) <= 25) && mousePressed) {
+    v = 0;
+    x = mouseX;
+    y = mouseY;
+  } else {
+    if (y < 256-25 && y - round(v) < 256-25) {
+      y = y + round(v);
+      v = v + g/100;
+      delay(1000/200);
+    } else {
+      v = 0;
+      y = 256-25;
+    }
+  }
+  ellipse(x,y,50,50);
+  if((dist(mouseX,mouseY,x2,y2) <= 25) && mousePressed) {
+    v2 = 0;
+    x2 = mouseX;
+    y2 = mouseY;
+  } else {
+    if (y2 < 256-25 && y2 - round(v2) < 256-25) {
+      y2 = y2 + round(v2);
+      v2 = v2 + g/100;
+      delay(1000/200);
+    } else {
+      v2 = 0;
+      y2 = 256-25;
+    }
+  }
+  ellipse(x2,y2,50,50);
+}
